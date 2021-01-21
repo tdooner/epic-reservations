@@ -8,11 +8,9 @@ class ReservationScraper
   end
 
   def reservations
-    chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
-    chrome_opts = chrome_bin ? { 'chromeOptions' => { 'binary' => chrome_bin } } : {}
-    caps = Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+    Selenium::WebDriver::Chrome.path ||= ENV.fetch('GOOGLE_CHROME_BIN', nil)
 
-    driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
+    driver = Selenium::WebDriver.for :chrome
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
 
     driver.find_element(id: 'onetrust-accept-btn-handler').click # cookie banner
