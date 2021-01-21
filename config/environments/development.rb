@@ -38,6 +38,12 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: 'tdooner.com',
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
