@@ -8,9 +8,17 @@ class ReservationScraper
   end
 
   def reservations
-    Selenium::WebDriver::Chrome.path ||= ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+    if ENV['GOOGLE_CHROME_SHIM']
+      Selenium::WebDriver::Chrome.path = ENV['GOOGLE_CHROME_SHIM']
+    end
+    Selenium::WebDriver.logger.level = :debug
+    Selenium::WebDriver.logger.output = Rails.root.join('log/selenium.log')
 
-    driver = Selenium::WebDriver.for :chrome
+    chrome_opts = Selenium::WebDriver::Chrome::Options.new
+    chrome_opts.add_argument('--verbose')
+    chrome_opts.add_argument("--log-file=#{Rails.root.join('log/chrome.log')}")
+
+    driver = Selenium::WebDriver.for :chrome, options: chrome_opts
     puts 'Loading My Account page'
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
 
