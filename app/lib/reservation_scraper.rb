@@ -17,6 +17,8 @@ class ReservationScraper
     chrome_opts = Selenium::WebDriver::Chrome::Options.new
     chrome_opts.add_argument('--verbose')
     chrome_opts.add_argument("--log-file=#{Rails.root.join('log/chrome.log')}")
+    chrome_opts.add_argument('--window-size=1440,1000')
+    chrome_opts.add_argument('--disable-dev-shm-usage')
 
     driver = Selenium::WebDriver.for :chrome, options: chrome_opts
     puts 'Loading My Account page'
