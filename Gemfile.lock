@@ -201,6 +201,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.4)
     ruby2_keywords (0.0.2)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
@@ -272,6 +273,7 @@ DEPENDENCIES
   pry
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
+  rexml
   sass-rails (>= 6)
   selenium-webdriver
   spring
