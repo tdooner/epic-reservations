@@ -70,6 +70,8 @@ GEM
     arbre (1.4.0)
       activesupport (>= 3.0.0, < 6.2)
       ruby2_keywords (>= 0.0.2, < 1.0)
+    attr_encrypted (3.1.0)
+      encryptor (~> 3.0.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.5.1)
@@ -96,6 +98,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    encryptor (3.0.0)
     erubi (1.10.0)
     ffi (1.14.2)
     formtastic (4.0.0.rc1)
@@ -280,6 +283,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  attr_encrypted
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)

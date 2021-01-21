@@ -27,6 +27,7 @@ gem 'devise', '>= 4.7.2'
 gem 'rexml'
 gem 'formtastic', '>= 4.0.0.rc1'
 gem 'mailgun-ruby'
+gem 'attr_encrypted'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
