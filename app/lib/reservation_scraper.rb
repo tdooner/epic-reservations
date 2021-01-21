@@ -8,7 +8,7 @@ class ReservationScraper
   end
 
   def reservations
-    Selenium::WebDriver::Chrome.path ||= ENV.fetch('GOOGLE_CHROME_BIN', nil)
+    Selenium::WebDriver::Chrome.path ||= ENV.fetch('GOOGLE_CHROME_SHIM', nil)
 
     driver = Selenium::WebDriver.for :chrome
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
