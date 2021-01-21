@@ -11,8 +11,10 @@ class ReservationScraper
     Selenium::WebDriver::Chrome.path ||= ENV.fetch('GOOGLE_CHROME_SHIM', nil)
 
     driver = Selenium::WebDriver.for :chrome
+    puts 'Loading My Account page'
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
 
+    puts 'Filling in form'
     driver.find_element(id: 'onetrust-accept-btn-handler').click # cookie banner
     driver.find_element(id: 'txtUserName_3').send_keys(@username)
     driver.find_element(id: 'txtPassword_3').send_keys(@password)
@@ -20,13 +22,16 @@ class ReservationScraper
 
     wait = Selenium::WebDriver::Wait.new(timeout: 10)
     wait.until { driver.find_element(css: 'h1.title') } # wait for page to load
+    puts 'Logged In'
 
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx?ma_1=4'
     wait.until { driver.find_element(class: 'season_passes__reservations__title--firstPass') }
+    puts 'Loaded "Reservations" tab'
     driver.find_element(class: 'season_passes__reservations__title--firstPass').click
 
     wait.until { driver.find_element(css: '.season_passes__reservations__content__list > li') }
     reservation_list = driver.find_elements(css: '.season_passes__reservations__content__list > li')
+    puts 'Loaded inner dropdown'
 
     reservations = reservation_list.map do |res|
       resort = res.find_element(css: 'div > div:nth-child(1)').text
