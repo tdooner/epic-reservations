@@ -23,8 +23,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'selenium-webdriver'
 gem 'webdrivers'
 gem 'activeadmin'
-gem 'devise'
+gem 'devise', '>= 4.7.2'
 gem 'rexml'
+gem 'formtastic', '>= 4.0.0.rc1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
