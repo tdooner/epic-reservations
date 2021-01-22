@@ -1,4 +1,4 @@
-<%= form_for @config, url: icalendar_configs_path do |f| %>
+<%= form_for @config, url: icalendar_configs_path, method: :patch do |f| %>
   <div class="mb-3">
     <%= f.label :public_share_code, class: 'form-label' %>
     <%= f.text_field :public_share_code, class: 'form-control' %>
