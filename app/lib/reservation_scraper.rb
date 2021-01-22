@@ -15,6 +15,7 @@ class ReservationScraper
     chrome_opts = Selenium::WebDriver::Chrome::Options.new
     chrome_opts.add_argument('--window-size=1440,1000')
     chrome_opts.add_argument('--disable-dev-shm-usage')
+    wait = Selenium::WebDriver::Wait.new(timeout: 10)
 
     driver = Selenium::WebDriver.for :chrome, options: chrome_opts
     puts "Beginning scrape for #{@username}"
@@ -28,7 +29,6 @@ class ReservationScraper
     driver.find_element(id: 'txtPassword_3').send_keys(@password)
     driver.find_element(css: '#returningCustomerForm_3 .primaryCTA').click
 
-    wait = Selenium::WebDriver::Wait.new(timeout: 10)
     wait.until { driver.find_element(css: 'h1.title') } # wait for page to load
     puts 'Logged In'
 
