@@ -11,12 +11,7 @@ class ReservationScraper
     if ENV['GOOGLE_CHROME_SHIM']
       Selenium::WebDriver::Chrome.path = ENV['GOOGLE_CHROME_SHIM']
     end
-    Selenium::WebDriver.logger.level = :debug
-    Selenium::WebDriver.logger.output = Rails.root.join('log/selenium.log')
-
     chrome_opts = Selenium::WebDriver::Chrome::Options.new
-    chrome_opts.add_argument('--verbose')
-    chrome_opts.add_argument("--log-file=#{Rails.root.join('log/chrome.log')}")
     chrome_opts.add_argument('--window-size=1440,1000')
     chrome_opts.add_argument('--disable-dev-shm-usage')
 
