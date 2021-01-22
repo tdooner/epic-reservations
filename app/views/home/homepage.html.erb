@@ -6,7 +6,7 @@
   <%= link_to 'Configure ICalendar', icalendar_configs_path %><br>
   <% if current_user.icalendar_config&.public_share_code&.present? %>
     <p>Add this to Google Calendar:</p>
-    <%= link_to ical_export_url(current_user.icalendar_config.public_share_code), ical_export_url(current_user.icalendar_config.public_share_code) %>
+    <%= link_to ical_export_url(current_user.icalendar_config.public_share_code, format: 'ics'), ical_export_url(current_user.icalendar_config.public_share_code, format: 'ics') %>
   <% end %>
 <% else %>
   Please log in to continue

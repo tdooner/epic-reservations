@@ -10,9 +10,10 @@ class ICalendarExportsController < ApplicationController
     @configs.flat_map do |config|
       config.user.reservations.map do |reservation|
         cal.event do |e|
-          e.dtstart = Icalendar::Values::DateOrDateTime.new(reservation.reservation_date)
-          e.dtend = Icalendar::Values::DateOrDateTime.new(reservation.reservation_date)
+          e.dtstart = Icalendar::Values::Date.new(reservation.reservation_date)
+          e.dtend = Icalendar::Values::Date.new(reservation.reservation_date)
           e.summary = "#{reservation.resort_name} (#{config.display_name})"
+          e.description = "Last fetched: #{reservation.fetched_at}"
         end
       end
     end
