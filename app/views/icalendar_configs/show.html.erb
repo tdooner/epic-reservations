@@ -1,0 +1,16 @@
+<%= form_for @config, url: icalendar_configs_path do |f| %>
+  <div class="mb-3">
+    <%= f.label :public_share_code, class: 'form-label' %>
+    <%= f.text_field :public_share_code, class: 'form-control' %>
+    <div class="form-text">
+      Use the same value here within a friend group. All events with the same share code will be merged onto a single calendar.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :display_name, class: 'form-label' %>
+    <%= f.text_field :display_name, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+<% end %>
