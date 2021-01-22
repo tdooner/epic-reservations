@@ -25,4 +25,19 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  show do
+    attributes_table do
+      row :email
+      row :last_sign_in_at
+      row :created_at
+    end
+
+    panel 'Reservations' do
+      table_for user.reservations.order(:reservation_date) do
+        column :reservation_date
+        column :resort_name
+        column :fetched_at
+      end
+    end
+  end
 end
