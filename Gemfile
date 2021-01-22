@@ -28,6 +28,7 @@ gem 'rexml'
 gem 'formtastic', '>= 4.0.0.rc1'
 gem 'mailgun-ruby'
 gem 'attr_encrypted'
+gem 'icalendar'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

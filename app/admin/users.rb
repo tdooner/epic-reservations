@@ -39,5 +39,12 @@ ActiveAdmin.register User do
         column :fetched_at
       end
     end
+
+    panel 'ICalendar Config' do
+      table_for user.icalendar_config do
+        column :public_share_code
+        column :display_name
+      end
+    end
   end
 end

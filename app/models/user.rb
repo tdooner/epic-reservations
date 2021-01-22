@@ -6,4 +6,5 @@ class User < ApplicationRecord
   attr_encrypted :epic_password, key: ENV['DATABASE_ENCRYPTION_KEY']
 
   has_many :reservations
+  has_one :icalendar_config, class_name: 'ICalendarConfig'
 end
