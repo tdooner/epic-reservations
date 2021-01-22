@@ -11,7 +11,6 @@ class ICalendarExportsController < ApplicationController
       config.user.reservations.map do |reservation|
         cal.event do |e|
           e.dtstart = Icalendar::Values::Date.new(reservation.reservation_date)
-          e.dtend = Icalendar::Values::Date.new(reservation.reservation_date)
           e.summary = "#{reservation.resort_name} (#{config.display_name})"
           e.description = "Last fetched: #{reservation.fetched_at}"
         end
