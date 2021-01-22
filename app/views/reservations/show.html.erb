@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Resort</th>
+      <th>Last Fetched</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.reservation_date.strftime('%A, %b %e') %></td>
+        <td><%= reservation.resort_name %></td>
+        <td><%= time_ago_in_words(reservation.fetched_at) %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
