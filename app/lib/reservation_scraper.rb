@@ -5,6 +5,7 @@ class ReservationScraper
   def initialize(epic_username, epic_password)
     @username = epic_username
     @password = epic_password
+    @retries = 3
   end
 
   def reservations
@@ -16,8 +17,10 @@ class ReservationScraper
     chrome_opts.add_argument('--disable-dev-shm-usage')
 
     driver = Selenium::WebDriver.for :chrome, options: chrome_opts
-    puts 'Loading My Account page'
+    puts "Beginning scrape for #{@username}"
     driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
+
+    wait.until { driver.find_element(id: 'onetrust-accept-btn-handler') }
 
     puts 'Filling in form'
     driver.find_element(id: 'onetrust-accept-btn-handler').click # cookie banner
@@ -46,5 +49,8 @@ class ReservationScraper
     end
 
     reservations
+  rescue Selenium::WebDriver::Error::NoSuchElementError
+    @retries -= 1
+    retry if @retries > 0
   end
 end
