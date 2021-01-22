@@ -1,0 +1,17 @@
+<%= form_for @user, url: epic_logins_path do |f| %>
+  <div class="mb-3">
+    <%= f.label :epic_username, clasS: 'form-label' %>
+    <%= f.text_field :epic_username, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :epic_password, clasS: 'form-label' %>
+    <%= f.password_field :epic_password, class: 'form-control' %>
+
+    <div class="form-text">
+      Your password will be stored encrypted on-disk.
+    </div>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+<% end %>

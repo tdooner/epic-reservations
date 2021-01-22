@@ -1,8 +1,6 @@
-<h1>Epic Reservations</h1>
-
 <% if current_user %>
-  <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+  <h1>Welcome, <%= link_to current_user.email, edit_user_registration_path %></h1>
+  <%= link_to 'Epic Login Info', epic_logins_path %>
 <% else %>
-  <%= link_to 'Log In', new_user_session_path %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
+  Please log in to continue
 <% end %>
