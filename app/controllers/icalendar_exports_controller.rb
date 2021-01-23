@@ -34,7 +34,8 @@ class ICalendarExportsController < ApplicationController
         .includes(user: :reservations)
 
     if @configs.none?
-      raise ActiveResource::ResourceNotFound
+      flash[:error] = "Couldn't find calendar with that name."
+      return redirect_to root_url
     end
   end
 end
