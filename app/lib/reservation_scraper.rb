@@ -2,6 +2,12 @@ require 'selenium-webdriver'
 require 'webdrivers'
 
 class ReservationScraper
+  RETRY_ERRORS = [
+    Selenium::WebDriver::Error::NoSuchElementError,
+    Selenium::WebDriver::Error::TimeoutError,
+    Selenium::WebDriver::Error::UnknownError
+  ]
+
   def initialize(epic_username, epic_password)
     @username = epic_username
     @password = epic_password
@@ -49,7 +55,7 @@ class ReservationScraper
     end
 
     reservations
-  rescue Selenium::WebDriver::Error::NoSuchElementError, Selenium::WebDriver::Error::TimeoutError
+  rescue *RETRY_ERRORS
     @retries -= 1
     retry if @retries > 0
   end
