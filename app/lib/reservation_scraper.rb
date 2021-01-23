@@ -5,7 +5,8 @@ class ReservationScraper
   RETRY_ERRORS = [
     Selenium::WebDriver::Error::NoSuchElementError,
     Selenium::WebDriver::Error::TimeoutError,
-    Selenium::WebDriver::Error::UnknownError
+    Selenium::WebDriver::Error::UnknownError,
+    Selenium::WebDriver::Error::NoSuchWindowError
   ]
 
   def initialize(epic_username, epic_password)
