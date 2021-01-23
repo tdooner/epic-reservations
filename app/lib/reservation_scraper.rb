@@ -49,7 +49,7 @@ class ReservationScraper
     end
 
     reservations
-  rescue Selenium::WebDriver::Error::NoSuchElementError
+  rescue Selenium::WebDriver::Error::NoSuchElementError, Selenium::WebDriver::Error::TimeoutError
     @retries -= 1
     retry if @retries > 0
   end
