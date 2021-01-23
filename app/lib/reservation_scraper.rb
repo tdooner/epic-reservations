@@ -55,8 +55,12 @@ class ReservationScraper
     end
 
     reservations
-  rescue *RETRY_ERRORS
+  rescue *RETRY_ERRORS => ex
     @retries -= 1
-    retry if @retries > 0
+    puts "Got exception #{ex}"
+    if @retries > 0
+      puts 'Retrying...'
+      retry if @retries > 0
+    end
   end
 end
