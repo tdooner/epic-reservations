@@ -23,26 +23,26 @@ class ReservationScraper
     chrome_opts.add_argument('--window-size=1440,1000')
     chrome_opts.add_argument('--disable-dev-shm-usage')
 
-    driver = Selenium::WebDriver.for :chrome, options: chrome_opts
+    @driver = Selenium::WebDriver.for :chrome, options: chrome_opts
     puts "Beginning scrape for #{@username}"
-    driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
+    @driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx'
     wait_for(id: 'onetrust-accept-btn-handler')
 
     puts 'Filling in form'
-    driver.find_element(id: 'onetrust-accept-btn-handler').click # cookie banner
-    driver.find_element(id: 'txtUserName_3').send_keys(@username)
-    driver.find_element(id: 'txtPassword_3').send_keys(@password)
-    driver.find_element(css: '#returningCustomerForm_3 .primaryCTA').click
+    @driver.find_element(id: 'onetrust-accept-btn-handler').click # cookie banner
+    @driver.find_element(id: 'txtUserName_3').send_keys(@username)
+    @driver.find_element(id: 'txtPassword_3').send_keys(@password)
+    @driver.find_element(css: '#returningCustomerForm_3 .primaryCTA').click
     wait_for(css: 'h1.title')
 
     puts 'Logged In'
-    driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx?ma_1=4'
+    @driver.navigate.to 'https://www.epicpass.com/account/my-account.aspx?ma_1=4'
     wait_for(class: 'season_passes__reservations__title--firstPass')
     puts 'Loaded "Reservations" tab'
-    driver.find_element(class: 'season_passes__reservations__title--firstPass').click
+    @driver.find_element(class: 'season_passes__reservations__title--firstPass').click
 
     wait_for(css: '.season_passes__reservations__content__list > li')
-    reservation_list = driver.find_elements(css: '.season_passes__reservations__content__list > li')
+    reservation_list = @driver.find_elements(css: '.season_passes__reservations__content__list > li')
     puts 'Loaded inner dropdown'
 
     reservations = reservation_list.map do |res|
@@ -63,9 +63,9 @@ class ReservationScraper
   end
 
   def wait_for(selector)
-    @wait.until { driver.find_element(selector) }
+    @wait.until { @driver.find_element(selector) }
   rescue Selenium::WebDriver::Error::TimeoutError => ex
     puts "Timeout looking for #{selector}: #{ex}"
-    puts "Page text: #{driver.find_element(css: 'body').text}"
+    puts "Page text: #{@driver.find_element(css: 'body').text}"
   end
 end
