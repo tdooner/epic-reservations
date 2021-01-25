@@ -1,18 +1,32 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Resort</th>
-      <th>Last Fetched</th>
+      <th style="width: 300px">Date</th>
+      <th style="width: 200px">Resort</th>
+      <th>Weather</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @reservations.each do |reservation| %>
+      <% forecast = @forecasts.find { |f| f.date == reservation.reservation_date && f.resort_name == reservation.resort_name } %>
       <tr>
         <td><%= reservation.reservation_date.strftime('%A, %b %e') %></td>
         <td><%= reservation.resort_name %></td>
-        <td><%= time_ago_in_words(reservation.fetched_at) %> ago</td>
+        <td>
+          <% if forecast %>
+            <% if forecast.snow_day.present? %>
+              <%= forecast.snow_day %> (day)
+            <% end %>
+            <% if forecast.snow_overnight.present? %>
+              <%= forecast.snow_overnight %> (overnight)
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          (todo: cancel or change resort)
+        </td>
       </tr>
     <% end %>
   </tbody>
