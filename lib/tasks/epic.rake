@@ -18,7 +18,7 @@ namespace :epic do
 
   desc 'scrape weather from epic'
   task scrape_weather: :environment do
-    needed_resorts = Reservation.upcoming.pluck(:resort_name).uniq
+    needed_resorts = Reservation.upcoming.pluck(:resort_name).uniq | ['Heavenly']
 
     puts "Fetching weather for resorts: #{needed_resorts}"
     needed_resorts.each do |resort_name|

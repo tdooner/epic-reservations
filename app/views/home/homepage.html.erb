@@ -1,13 +1,6 @@
 <% if current_user %>
-  <h1>Welcome, <%= link_to current_user.email, edit_user_registration_path %></h1>
+  <h2>Welcome, <%= link_to current_user.email, edit_user_registration_path %></h2>
   <%= link_to 'Epic Login Info', epic_logins_path %><br>
-  <hr>
-  <h2>ICalendar Feed:</h2>
-  <%= link_to 'Configure ICalendar', icalendar_configs_path %><br>
-  <% if current_user.icalendar_config&.public_share_code&.present? %>
-    <p>Add this to Google Calendar:</p>
-    <%= link_to ical_export_url(current_user.icalendar_config.public_share_code, format: 'ics'), ical_export_url(current_user.icalendar_config.public_share_code, format: 'ics') %>
-  <% end %>
 <% else %>
   Please log in to continue
 <% end %>
