@@ -31,3 +31,6 @@
     <% end %>
   </tbody>
 </table>
+
+<% max_fetched_at = @forecasts.map(&:updated_at).max %>
+<p>Last fetched <span title="<%= max_fetched_at.in_time_zone('America/Los_Angeles') %>"><%= time_ago_in_words(max_fetched_at) %> ago</span></p>
