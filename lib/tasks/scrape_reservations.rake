@@ -2,7 +2,7 @@ namespace :epic do
   desc 'scrape reservations for users from epicmix'
   task scrape_reservations: :environment do
     User.find_each do |user|
-      reservations = ReservationScraper.new(user.epic_username, user.epic_password).reservations
+      reservations = Scrapers::ReservationScraper.new(user.epic_username, user.epic_password).reservations
 
       Reservation.transaction do
         existing_reservations = reservations.map do |res|
