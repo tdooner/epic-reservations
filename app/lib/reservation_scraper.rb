@@ -1,5 +1,6 @@
 require 'selenium-webdriver'
 require 'webdrivers'
+require 'fileutils'
 
 class ReservationScraper
   RETRY_ERRORS = [
@@ -17,12 +18,14 @@ class ReservationScraper
   end
 
   def reservations
+    @tmpdir = Dir.mktmpdir
     if ENV['GOOGLE_CHROME_SHIM']
       Selenium::WebDriver::Chrome.path = ENV['GOOGLE_CHROME_SHIM']
     end
     chrome_opts = Selenium::WebDriver::Chrome::Options.new
     chrome_opts.add_argument('--window-size=1440,1000')
     chrome_opts.add_argument('--disable-dev-shm-usage')
+    chrome_opts.add_argument("--user-data-dir=#{@tmpdir}")
 
     @driver = Selenium::WebDriver.for :chrome, options: chrome_opts
     puts "Beginning scrape for #{@username}"
@@ -58,9 +61,13 @@ class ReservationScraper
     @retries -= 1
     puts "Got exception #{ex}"
     if @retries > 0
-      puts 'Retrying in 20 seconds...'
+      puts 'Retrying in 10 seconds...'
+      sleep 10
       retry if @retries > 0
     end
+  ensure
+    @driver.quit
+    FileUtils.rm_rf(@tmpdir)
   end
 
   def wait_for(selector)
