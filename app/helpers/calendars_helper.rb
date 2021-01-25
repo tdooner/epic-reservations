@@ -11,7 +11,7 @@ module CalendarsHelper
     safe_join([
       "Temp: #{forecast.temperature_high}/#{forecast.temperature_low}",
       ("Snow: #{forecast.snow_day} (day) / #{forecast.snow_overnight} (overnight)" if has_snow_forecast),
-      (forecast.remarks if forecast.remarks.present?), 
-    ].compact, ' | ')
+      (forecast.remarks if forecast.remarks.present?),
+    ].compact, '<br>'.html_safe)
   end
 end
