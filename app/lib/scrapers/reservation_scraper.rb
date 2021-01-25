@@ -66,3 +66,4 @@ module Scrapers
       puts "Page text: #{@driver.find_element(css: 'body').text}"
     end
   end
+end
