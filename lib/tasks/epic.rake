@@ -11,7 +11,7 @@ namespace :epic do
             .tap { |r| r.touch(:fetched_at) }
         end
 
-        user.reservations.where.not(id: existing_reservations).destroy_all
+        user.reservations.upcoming.where.not(id: existing_reservations).destroy_all
       end
     end
   end
